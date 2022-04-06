@@ -48,8 +48,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        canMove = false;
-        rb2d.MovePosition( new Vector2(initialX, initialY) );
+        
+        switch (collision.gameObject.tag)
+        {
+            case "Enemy":
+                canMove = false;
+                rb2d.MovePosition(new Vector2(initialX, initialY));
+            break;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
