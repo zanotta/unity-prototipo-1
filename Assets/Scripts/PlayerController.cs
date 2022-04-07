@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
-    private float currentX, currentY;
     private Rigidbody2D rb2d;
     private bool canMove = true;
     public float initialX, initialY = 0f;
@@ -23,16 +22,29 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
 
-        currentX        = this.transform.position.x;
-        currentY        = this.transform.position.y;
         rb2d.velocity   = Vector2.zero;
 
         if ( canMove )
         {
-            moveHorizontal  = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-            moveVertical    = Input.GetAxis("Vertical") * speed * Time.deltaTime;
 
-            transform.Translate(moveHorizontal, moveVertical, 0);
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(-Vector2.right * speed * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(Vector2.right * speed * Time.deltaTime);
+            }
+
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.Translate(Vector2.up * speed * Time.deltaTime);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                transform.Translate(-Vector2.up * speed * Time.deltaTime);
+            }
+
         }
         
     }
