@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
 
         currentX        = this.transform.position.x;
         currentY        = this.transform.position.y;
-        //rb2d.velocity   = Vector2.zero;
 
         if ( canMove )
         {
