@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 0.1f;
+    private float currentX, currentY;
     private Rigidbody2D rb2d;
     private bool canMove = true;
     public float initialX, initialY = 0f;
-
-    public float moveHorizontal;
-    public float moveVertical;
 
     // Start is called before the first frame update
     void Start()
@@ -22,42 +20,42 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
 
-        rb2d.velocity   = Vector2.zero;
+        currentX = this.transform.position.x;
+        currentY = this.transform.position.y;
 
-        if ( canMove )
+        if (canMove)
         {
 
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Translate(-Vector2.right * speed * Time.deltaTime);
+                rb2d.MovePosition(new Vector2(currentX - speed, currentY));
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                transform.Translate(Vector2.right * speed * Time.deltaTime);
+                rb2d.MovePosition(new Vector2(currentX + speed, currentY));
             }
 
             if (Input.GetKey(KeyCode.W))
             {
-                transform.Translate(Vector2.up * speed * Time.deltaTime);
+                rb2d.MovePosition(new Vector2(currentX, currentY + speed));
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                transform.Translate(-Vector2.up * speed * Time.deltaTime);
+                rb2d.MovePosition(new Vector2(currentX, currentY - speed));
             }
-
         }
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         switch (collision.gameObject.tag)
         {
             case "Enemy":
                 canMove = false;
                 rb2d.MovePosition(new Vector2(initialX, initialY));
-            break;
+                break;
         }
     }
 
