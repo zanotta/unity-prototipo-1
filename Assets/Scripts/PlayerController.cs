@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 0.2f;
+    public float speed = 5f;
     private float currentX, currentY;
     private Rigidbody2D rb2d;
     private bool canMove = true;
     public float initialX, initialY = 0f;
+
+    public float moveHorizontal;
+    public float moveVertical;
 
     // Start is called before the first frame update
     void Start()
@@ -22,25 +25,14 @@ public class PlayerController : MonoBehaviour
 
         currentX        = this.transform.position.x;
         currentY        = this.transform.position.y;
+        rb2d.velocity   = Vector2.zero;
 
         if ( canMove )
         {
-            if (Input.GetKey(KeyCode.D))
-            {
-                rb2d.MovePosition(new Vector2(currentX + speed, currentY));
-            }
-            if (Input.GetKey(KeyCode.W))
-            {
-                rb2d.MovePosition(new Vector2(currentX, currentY + speed));
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                rb2d.MovePosition(new Vector2(currentX - speed, currentY));
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                rb2d.MovePosition(new Vector2(currentX, currentY - speed));
-            }
+            moveHorizontal  = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+            moveVertical    = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+
+            transform.Translate(moveHorizontal, moveVertical, 0);
         }
         
     }
