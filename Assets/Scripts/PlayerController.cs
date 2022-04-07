@@ -57,6 +57,10 @@ public class PlayerController : MonoBehaviour
                 GameController.instance.increaseDeath();
                 rb2d.MovePosition(new Vector2(initialX, initialY));
             break;
+            case "Goal":
+                canMove = false;
+                GameController.instance.nextLevel();
+            break;
         }
     }
 
