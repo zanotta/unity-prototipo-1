@@ -28,20 +28,20 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKey(KeyCode.A))
             {
-                rb2d.MovePosition(new Vector2(currentX - speed, currentY));
+                transform.Translate(-Vector2.right * speed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                rb2d.MovePosition(new Vector2(currentX + speed, currentY));
+                transform.Translate(Vector2.right * speed * Time.deltaTime);
             }
 
             if (Input.GetKey(KeyCode.W))
             {
-                rb2d.MovePosition(new Vector2(currentX, currentY + speed));
+                transform.Translate(Vector2.up * speed * Time.deltaTime);
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                rb2d.MovePosition(new Vector2(currentX, currentY - speed));
+                transform.Translate(-Vector2.up * speed * Time.deltaTime);
             }
         }
 
