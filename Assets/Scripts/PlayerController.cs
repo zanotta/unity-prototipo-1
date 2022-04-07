@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
             case "Enemy":
                 canMove = false;
                 rb2d.MovePosition(new Vector2(initialX, initialY));
-                break;
+            break;
         }
     }
 
